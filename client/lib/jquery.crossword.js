@@ -25,7 +25,7 @@
 			
 			// append clues markup after puzzle wrapper div
 			// This should be moved into a configuration object
-			this.after('<div id="puzzle-clues"><h2>Across</h2><ul id="across"></ul><h2>Down</h2><ul id="down"></ul></div>');
+			this.after('<div id="puzzle-clues"><div style="float:left"><h2>Across</h2><ul id="across"></ul></div><div style="float:right"><h2>Down</h2><ul id="down"></ul></div></div>');
 			
 			// initialize some variables
 			var tbl = ['<table id="puzzle">'],

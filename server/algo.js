@@ -6,7 +6,7 @@ runAlgo = function (slots) {
   var maxSlotsCount = 0;
 
   var startTime = new Date().getTime();
-  var MAX_RUN_TIME = 10*1000;
+  var MAX_RUN_TIME = 15*1000;
 
   // pre-processing
   for (var i = 0; i < slots.length; i++) {
@@ -26,7 +26,8 @@ runAlgo = function (slots) {
       maxSlots = clone(slots);
       maxBoard = clone(board);
       // console.log(maxSlotsCount);
-      // printBoard(maxBoard);
+      pushToMongo();
+      printBoard(maxBoard);
     }
   }
 
@@ -35,7 +36,7 @@ runAlgo = function (slots) {
   }
 
   function getSlotIndex (board) {
-    var maxCollisions = -1;
+    var maxCollisions = -100000000;
     var mcSlotIndex = -1;
 
     for (var i = 0; i < slots.length; i++) {
@@ -44,7 +45,8 @@ runAlgo = function (slots) {
         continue;
       }
 
-      collisions = 0;
+      var collisions = 0;
+      var num5Star = 0;
       for (var j = 0; j < slot.len; j++) {
         var curX = slot.startx;
         var curY = slot.starty;
@@ -59,6 +61,18 @@ runAlgo = function (slots) {
           collisions++;
       }
 
+      // Check number of 5 star answer choices and pick clue with lowest one
+      for (var j = 0; j < slot.answers.length; j++) {
+        if (slot.answers[j].conf === 5) {
+          num5Star++;
+        }
+      }
+
+      if (num5Star) {
+        collisions =  (collisions * 50) - num5Star;
+      }
+
+
       if (collisions > maxCollisions) {
         maxCollisions = collisions;
         mcSlotIndex = i;
@@ -66,7 +80,7 @@ runAlgo = function (slots) {
     }
 
     return mcSlotIndex;
-  }
+}
 
   function getPossibleAnswers (slotIndex) {
     return slots[slotIndex].answers;
@@ -157,7 +171,7 @@ runAlgo = function (slots) {
       eraseAnswer(slotIndex);
     }
 
-    if (numSkips < 0.025 * slots.length) {
+    if (numSkips < 3) {
       slots[slotIndex].answer = "*";
       if (solve(board, ++numSkips)) {
         return true;
@@ -167,7 +181,7 @@ runAlgo = function (slots) {
     return false;
   }
 
-  function printBoard(board) {
+  function printBoard (board) {
     for (var i = 0; i < 15; i++) {
       cur = ""
       for (var j = 0; j < 15; j++) {
@@ -179,6 +193,27 @@ runAlgo = function (slots) {
       console.log(cur);
     }
     console.log();
+  }
+
+  function pushToMongo () {
+    var maxSlotsMongo = clone(maxSlots);
+    maxSlotsMongo.forEach(function (slot) {
+      if (slot.answer === "*") {
+        var newAns = "";
+        for (var i = 0; i < slot.len; i++)
+          newAns += " ";
+        slot.answer = newAns;
+      }
+    });
+    for (var i = 0; i < maxSlotsMongo.length; i++) {
+      maxSlotsMongo[i].startx++;
+      maxSlotsMongo[i].starty++;
+    }
+
+    for (var i = 0; i < maxSlotsMongo.length; i++) {
+      var slot = maxSlotsMongo[i];
+      Slots.update({_id: slot._id}, slot);
+    }
   }
 
   board = [];
@@ -209,21 +244,22 @@ runAlgo = function (slots) {
   console.log('DONE!');
 
   // post-processing
-  maxSlots.forEach(function (slot) {
-    if (slot.answer === "*") {
-      var newAns = "";
-      for (var i = 0; i < slot.len; i++)
-        newAns += " ";
-      slot.answer = newAns;
-    }
-  });
-  for (var i = 0; i < maxSlots.length; i++) {
-    maxSlots[i].startx++;
-    maxSlots[i].starty++;
-  }
+  pushToMongo();
+  // maxSlots.forEach(function (slot) {
+  //   if (slot.answer === "*") {
+  //     var newAns = "";
+  //     for (var i = 0; i < slot.len; i++)
+  //       newAns += " ";
+  //     slot.answer = newAns;
+  //   }
+  // });
+  // for (var i = 0; i < maxSlots.length; i++) {
+  //   maxSlots[i].startx++;
+  //   maxSlots[i].starty++;
+  // }
 
-  for (var i = 0; i < maxSlots.length; i++) {
-    var slot = maxSlots[i];
-    Slots.insert(slot);
-  }
+  // for (var i = 0; i < maxSlots.length; i++) {
+  //   var slot = maxSlots[i];
+  //   Slots.update({_id: slot._id}, slot);
+  // }
 }

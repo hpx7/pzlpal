@@ -46,9 +46,10 @@ value = `#{cmd}`
 
 # Run tesseract
 clues = ""
-Dir.foreach("#{path}/columns") do |item|
-  next if item == '.' or item == '..'
-  cmd = "tesseract #{path}/columns/#{item} #{path}/tess -l eng"
+numFiles = Dir.glob(File.join("#{path}/columns", '**', '*')).select { |file| File.file?(file) }.count
+
+(0..(numFiles-1)).each do |i|
+  cmd = "tesseract #{path}/columns/#{i}.jpg #{path}/tess -l eng"
   value = `#{cmd}`
   textfile = File.open("#{path}/tess.txt", "rb")
   clues += textfile.read

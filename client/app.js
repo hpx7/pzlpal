@@ -8,7 +8,10 @@ Router.map(function () {
     path: '/'
   });
   this.route('puzzle', {
-    path: '/crossword/:_id'
+    path: '/crossword/:_id',
+    before: function () {
+      Session.set('crosswordId', this.params._id);
+    }
   });
 });
 
@@ -17,7 +20,6 @@ function clone (obj) {
 }
 
 function fillChar (c, x, y) {
-  // console.log('fillChar ' + c + ' ' + x + ' ' + y);
   if (c !== ' ')
     $('td[data-coords="' + x + ',' + y + '"]').find('input').val(c);
 }
@@ -33,6 +35,11 @@ function fillSlot (slot) {
   }
 }
 
+Template.crossword.notSolved = function () {
+  var slots = Slots.find({crosswordId: Session.get('crosswordId')}).fetch();
+  return !slots.answers;
+}
+
 Template.home.events({
   'click .btn': function (e) {
     var crossword = {
@@ -41,14 +48,24 @@ Template.home.events({
       cols: $('#cols').val()
     };
     var id = Crosswords.insert(crossword);
-    Meteor.call('parseImg', id);
+    Meteor.call('parseImg', id, function (error, result) {
+      Router.go('/crossword/' + id);
+    });
+  }
+});
+
+Template.crossword.events({
+  'click .btn': function (e) {
+    Meteor.call('solve', Session.get('crosswordId'));
   }
 });
 
 // XXX use waitOn?
 Template.crossword.rendered = function () {
-  var slots = Slots.find().fetch();
+  var slots = Slots.find({crosswordId: Session.get('crosswordId')}).fetch();
   if (slots.length) {
+    $('#puzzle-wrapper').html('');
+    $('#puzzle-clues').html('');
     $('#puzzle-wrapper').crossword(clone(slots));
     for (var i = 0; i < slots.length; i++) {
       fillSlot(slots[i]);

@@ -15,14 +15,24 @@ Meteor.methods({
 
     // XXX make this more efficient?
     var result = sh.exec(execString);
-    // console.log(result);
+    console.log(result);
     console.log('done executing image parsing');
 
     var pathToJSON = wd + '/out.json';
     var data = JSON.parse(fs.readFileSync(pathToJSON, 'utf8'));
-    console.log('DATA from image file: ' + data)
+
+    for (var i = 0; i < data.length; i++) {
+      var slot = _.extend(data[i], {crosswordId: crosswordId});
+      Slots.insert(slot);
+    }
+    console.log('done parsing');
+    
+	},
+  solve: function (crosswordId) {
+    console.log('solving');
+    var data = Slots.find({crosswordId: crosswordId}).fetch();
     go(data);
-	}
+  }
 });
 
 function go (data) {
@@ -31,20 +41,27 @@ function go (data) {
     for (var j = 0; j < data[i].len; j++)
       pattern += "?";
     searchWordplays(data[i].clue, pattern, data, i);
-    console.log(i+1);
+    // console.log(i+1);
   }
-  runAlgo(data);
+  // console.log(JSON.stringify(data));
+  // runAlgo(data);
 }
 
+var count = 0;
+
+// XXX timer
 function searchWordplays (clue, pattern, data, dataIdx) {
 	var url = 'http://www.wordplays.com/crossword-solver';
 
-  while (true) {
+  HTTP.post(url, { params: { clue: clue, pattern: pattern } }, function (error, result) {
+    if (error) {
+      console.log("ERROR1: ... retrying");
+      searchWordplays(clue, pattern, data, dataIdx);
+    }
+
+    var body = result.content;
+
     try {
-      var result = HTTP.post(url, { params: { clue: clue, pattern: pattern } });
-
-      var body = result.content;
-
       var wrapped = Async.wrap(jsdom.env);
       var window = wrapped(body, ["http://code.jquery.com/jquery.js"]);
       var $ = window.$;
@@ -62,10 +79,16 @@ function searchWordplays (clue, pattern, data, dataIdx) {
         result.push({ name: answers[i], conf: ranks[i] });
 
       data[dataIdx].answers = result;
-
-      break;
-    } catch (err) {
-      console.error("ERROR: " + error + " ... retrying");
+    } catch (error) {
+      console.log("ERROR2: ... retrying");
+      searchWordplays(clue, pattern, data, dataIdx);
     }
-  }
+
+    count++;
+    console.log(count);
+    if (count === data.length) {
+      runAlgo(data);
+      count = 0;
+    }
+  });
 }

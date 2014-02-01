@@ -15,23 +15,29 @@
 </template>
 
 <template name="puzzle">
-  {{#constant}}
   {{> crossword}}
-  {{/constant}}
 </template>
 
 <template name="crossword">
+  {{#if notSolved}}
+    <br>
+    <center><button class="btn btn-primary btn-lg">Solve Crossword</button></center>
+    <br><br>
+  {{/if}}
+
+  {{#constant}}
   <div id="puzzle-wrapper"></div>
+  {{/constant}}
 </template>
 
 <template name="home">
 	<div class="col-md-12">
     <label>Crossword image url: </label>
-    <input id="url">
+    <input value="http://i.imgur.com/irdJPna.jpg" id="url">
     <label>Num rows:</label>
-    <input id="rows" style="width: 40px;">
+    <input value="15" id="rows" style="width: 40px;">
     <label>Num cols:</label>
-    <input id="cols" style="width: 40px;">
+    <input value="15" id="cols" style="width: 40px;">
     <br><br>
     <button class="btn btn-primary">Digitize</button>
   </div>
@@ -42,7 +48,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="navbar-header">
-          <a class="navbar-brand" href="/">Crossword Solver</a>
+          <a class="navbar-brand" href="/">PZLPal</a>
         </div>
       </div>
     </div>
