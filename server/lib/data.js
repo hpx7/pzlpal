@@ -69,4 +69,4 @@ var array =
 	 }
      ];
 
-module.exports.array = array;
+slots = array;

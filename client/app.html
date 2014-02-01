@@ -1,0 +1,56 @@
+<head>
+	<title>Crossword Solver</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+
+<template name="layout">
+  <body>
+    {{> navbar}}
+    <div class="container-fluid">
+      <div class="row">
+        {{yield}}
+      </div>
+    </div>
+  </body>
+</template>
+
+<template name="puzzle">
+  {{#constant}}
+  {{> crossword}}
+  {{/constant}}
+</template>
+
+<template name="crossword">
+  <div id="puzzle-wrapper"></div>
+</template>
+
+<template name="home">
+	<div class="col-md-12">
+    <label>Crossword image url: </label>
+    <input id="url">
+    <label>Num rows:</label>
+    <input id="rows" style="width: 40px;">
+    <label>Num cols:</label>
+    <input id="cols" style="width: 40px;">
+    <br><br>
+    <button class="btn btn-primary">Digitize</button>
+  </div>
+</template>
+
+<template name="navbar">
+  <div class="navbar navbar-inverse navbar-static-top" role="navigation">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">Crossword Solver</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="notFound">
+  <div class="col-md-12">
+    <center>404 Not Found</center>
+  </div>
+</template>

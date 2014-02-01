@@ -9,6 +9,7 @@ image_url = ARGV[0]
 width = ARGV[1].to_i
 height = ARGV[2].to_i
 path = ARGV[3]
+exec_dir = ARGV[4]
 
 # Download file
 open(image_url) {|f|
@@ -20,7 +21,7 @@ open(image_url) {|f|
 # Find grid
 grid_data = [] # 2D array where black = 0, white = 1
 grid_left, grid_top, grid_width, grid_height = 0
-cmd = "python find_grid.py #{path}/original.jpg #{width} #{height} 0"
+cmd = "python #{exec_dir}/find_grid.py #{path}/original.jpg #{width} #{height} 0"
 value = `#{cmd}`
 value.lines.each_with_index do |line, i|
   s = line.chomp
@@ -35,19 +36,19 @@ value.lines.each_with_index do |line, i|
 end
 
 # Clean image
-cmd = "python clean_image.py #{path}/original.jpg #{path}/new.jpg #{grid_left} #{grid_top} #{grid_width} #{grid_height}"
+cmd = "python #{exec_dir}/clean_image.py #{path}/original.jpg #{path}/new.jpg #{grid_left} #{grid_top} #{grid_width} #{grid_height}"
 value = `#{cmd}`
 
 # Get columns for tesseract
 Dir.mkdir("#{path}/columns")
-cmd = "python find_columns.py #{path}/new.jpg #{path}/columns"
+cmd = "python #{exec_dir}/find_columns.py #{path}/new.jpg #{path}/columns"
 value = `#{cmd}`
 
 # Run tesseract
 clues = ""
 Dir.foreach("#{path}/columns") do |item|
   next if item == '.' or item == '..'
-  cmd = "tesseract #{path}/columns/#{item} #{path}/tess -l eng custom_bl"
+  cmd = "tesseract #{path}/columns/#{item} #{path}/tess -l eng"
   value = `#{cmd}`
   textfile = File.open("#{path}/tess.txt", "rb")
   clues += textfile.read
@@ -82,8 +83,8 @@ grid_data.each_with_index do |row,i|
         crawl += 1
       end
 
-      slot[:length] = crawl-j
-      slot[:answer] = " "*slot[:length]
+      slot[:len] = crawl-j
+      slot[:answer] = " "*slot[:len]
       slots << slot
     end
 
@@ -103,8 +104,8 @@ grid_data.each_with_index do |row,i|
         crawl += 1
       end
 
-      slot[:length] = crawl-i
-      slot[:answer] = " "*slot[:length]
+      slot[:len] = crawl-i
+      slot[:answer] = " "*slot[:len]
       slots << slot
     end
   end

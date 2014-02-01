@@ -1,0 +1,704 @@
+[
+  {
+    "clue": "Cripple",
+    "len": 4,
+    "position": 1,
+    "answer": "    ",
+    "startx": 1,
+    "starty": 1,
+    "orientation": "across"
+  },
+  {
+    "clue": "Chorus member",
+    "len": 4,
+    "position": 5,
+    "answer": "    ",
+    "startx": 6,
+    "starty": 1,
+    "orientation": "across"
+  },
+  {
+    "clue": "Old adders",
+    "len": 5,
+    "position": 9,
+    "answer": "     ",
+    "startx": 11,
+    "starty": 1,
+    "orientation": "across"
+  },
+  {
+    "clue": "Alan of \"The Seduction of Joe Tynan\"",
+    "len": 4,
+    "position": 14,
+    "answer": "    ",
+    "startx": 1,
+    "starty": 2,
+    "orientation": "across"
+  },
+  {
+    "clue": "Ballet move",
+    "len": 4,
+    "position": 15,
+    "answer": "    ",
+    "startx": 6,
+    "starty": 2,
+    "orientation": "across"
+  },
+  {
+    "clue": "Early computer language",
+    "len": 5,
+    "position": 16,
+    "answer": "     ",
+    "startx": 11,
+    "starty": 2,
+    "orientation": "across"
+  },
+  {
+    "clue": "Light gas",
+    "len": 4,
+    "position": 17,
+    "answer": "    ",
+    "startx": 1,
+    "starty": 3,
+    "orientation": "across"
+  },
+  {
+    "clue": "Gawk at",
+    "len": 4,
+    "position": 18,
+    "answer": "    ",
+    "startx": 6,
+    "starty": 3,
+    "orientation": "across"
+  },
+  {
+    "clue": "Type of type",
+    "len": 5,
+    "position": 19,
+    "answer": "     ",
+    "startx": 11,
+    "starty": 3,
+    "orientation": "across"
+  },
+  {
+    "clue": "Examination, redundantly",
+    "len": 13,
+    "position": 20,
+    "answer": "             ",
+    "startx": 2,
+    "starty": 4,
+    "orientation": "across"
+  },
+  {
+    "clue": "Increase, with \"up\"",
+    "len": 3,
+    "position": 23,
+    "answer": "   ",
+    "startx": 4,
+    "starty": 5,
+    "orientation": "across"
+  },
+  {
+    "clue": "Quick on the uptake",
+    "len": 3,
+    "position": 24,
+    "answer": "   ",
+    "startx": 9,
+    "starty": 5,
+    "orientation": "across"
+  },
+  {
+    "clue": "Frisk, with \"down\"",
+    "len": 3,
+    "position": 25,
+    "answer": "   ",
+    "startx": 1,
+    "starty": 6,
+    "orientation": "across"
+  },
+  {
+    "clue": "\"The Way We __\"",
+    "len": 4,
+    "position": 28,
+    "answer": "    ",
+    "startx": 5,
+    "starty": 6,
+    "orientation": "across"
+  },
+  {
+    "clue": "Perfectos, e.g.",
+    "len": 6,
+    "position": 31,
+    "answer": "      ",
+    "startx": 10,
+    "starty": 6,
+    "orientation": "across"
+  },
+  {
+    "clue": "Director Kazan",
+    "len": 4,
+    "position": 36,
+    "answer": "    ",
+    "startx": 1,
+    "starty": 7,
+    "orientation": "across"
+  },
+  {
+    "clue": "Colonel or captain",
+    "len": 4,
+    "position": 38,
+    "answer": "    ",
+    "startx": 6,
+    "starty": 7,
+    "orientation": "across"
+  },
+  {
+    "clue": "Gymnast Comaneci",
+    "len": 5,
+    "position": 40,
+    "answer": "     ",
+    "startx": 11,
+    "starty": 7,
+    "orientation": "across"
+  },
+  {
+    "clue": "Pestering, redundantly",
+    "len": 15,
+    "position": 41,
+    "answer": "               ",
+    "startx": 1,
+    "starty": 8,
+    "orientation": "across"
+  },
+  {
+    "clue": "Uniform shade",
+    "len": 5,
+    "position": 44,
+    "answer": "     ",
+    "startx": 1,
+    "starty": 9,
+    "orientation": "across"
+  },
+  {
+    "clue": "Student driver, usuaHy",
+    "len": 4,
+    "position": 45,
+    "answer": "    ",
+    "startx": 7,
+    "starty": 9,
+    "orientation": "across"
+  },
+  {
+    "clue": "Wrigley Field slugger",
+    "len": 4,
+    "position": 46,
+    "answer": "    ",
+    "startx": 12,
+    "starty": 9,
+    "orientation": "across"
+  },
+  {
+    "clue": "Gets smart with",
+    "len": 6,
+    "position": 47,
+    "answer": "      ",
+    "startx": 1,
+    "starty": 10,
+    "orientation": "across"
+  },
+  {
+    "clue": "Try for a part",
+    "len": 4,
+    "position": 49,
+    "answer": "    ",
+    "startx": 8,
+    "starty": 10,
+    "orientation": "across"
+  },
+  {
+    "clue": "One of 100 in D.C.",
+    "len": 3,
+    "position": 51,
+    "answer": "   ",
+    "startx": 13,
+    "starty": 10,
+    "orientation": "across"
+  },
+  {
+    "clue": "Conquistador's prize",
+    "len": 3,
+    "position": 52,
+    "answer": "   ",
+    "startx": 5,
+    "starty": 11,
+    "orientation": "across"
+  },
+  {
+    "clue": "Whisper sweet nothings",
+    "len": 3,
+    "position": 54,
+    "answer": "   ",
+    "startx": 10,
+    "starty": 11,
+    "orientation": "across"
+  },
+  {
+    "clue": "Angry outburst, redundantly",
+    "len": 13,
+    "position": 56,
+    "answer": "             ",
+    "startx": 2,
+    "starty": 12,
+    "orientation": "across"
+  },
+  {
+    "clue": "Oscar winner Foster",
+    "len": 5,
+    "position": 63,
+    "answer": "     ",
+    "startx": 1,
+    "starty": 13,
+    "orientation": "across"
+  },
+  {
+    "clue": "Unable to decide",
+    "len": 4,
+    "position": 64,
+    "answer": "    ",
+    "startx": 7,
+    "starty": 13,
+    "orientation": "across"
+  },
+  {
+    "clue": "Took off",
+    "len": 4,
+    "position": 65,
+    "answer": "    ",
+    "startx": 12,
+    "starty": 13,
+    "orientation": "across"
+  },
+  {
+    "clue": "Maine college town",
+    "len": 5,
+    "position": 67,
+    "answer": "     ",
+    "startx": 1,
+    "starty": 14,
+    "orientation": "across"
+  },
+  {
+    "clue": "\"Zounds!\"",
+    "len": 4,
+    "position": 68,
+    "answer": "    ",
+    "startx": 7,
+    "starty": 14,
+    "orientation": "across"
+  },
+  {
+    "clue": "Jacob's twin",
+    "len": 4,
+    "position": 69,
+    "answer": "    ",
+    "startx": 12,
+    "starty": 14,
+    "orientation": "across"
+  },
+  {
+    "clue": "Von Munchhausen, e.g.",
+    "len": 5,
+    "position": 70,
+    "answer": "     ",
+    "startx": 1,
+    "starty": 15,
+    "orientation": "across"
+  },
+  {
+    "clue": "Lady of Lisbon",
+    "len": 4,
+    "position": 71,
+    "answer": "    ",
+    "startx": 7,
+    "starty": 15,
+    "orientation": "across"
+  },
+  {
+    "clue": "Medium—_,",
+    "len": 4,
+    "position": 72,
+    "answer": "    ",
+    "startx": 12,
+    "starty": 15,
+    "orientation": "across"
+  },
+  {
+    "clue": "\"Hoo—ey!\"",
+    "len": 3,
+    "position": 1,
+    "answer": "   ",
+    "startx": 1,
+    "starty": 1,
+    "orientation": "down"
+  },
+  {
+    "clue": "Baldwin of \"Talk Radio\"",
+    "len": 4,
+    "position": 2,
+    "answer": "    ",
+    "startx": 2,
+    "starty": 1,
+    "orientation": "down"
+  },
+  {
+    "clue": "Elvis or Madonna, e.g.",
+    "len": 4,
+    "position": 3,
+    "answer": "    ",
+    "startx": 3,
+    "starty": 1,
+    "orientation": "down"
+  },
+  {
+    "clue": "Lord's home",
+    "len": 5,
+    "position": 4,
+    "answer": "     ",
+    "startx": 4,
+    "starty": 1,
+    "orientation": "down"
+  },
+  {
+    "clue": "Skin cream ingredient",
+    "len": 8,
+    "position": 5,
+    "answer": "        ",
+    "startx": 6,
+    "starty": 1,
+    "orientation": "down"
+  },
+  {
+    "clue": "Longevity at the box office",
+    "len": 4,
+    "position": 6,
+    "answer": "    ",
+    "startx": 7,
+    "starty": 1,
+    "orientation": "down"
+  },
+  {
+    "clue": "Soft mineral",
+    "len": 4,
+    "position": 7,
+    "answer": "    ",
+    "startx": 8,
+    "starty": 1,
+    "orientation": "down"
+  },
+  {
+    "clue": "\"ll Trovatore,\" e.g.",
+    "len": 5,
+    "position": 8,
+    "answer": "     ",
+    "startx": 9,
+    "starty": 1,
+    "orientation": "down"
+  },
+  {
+    "clue": "Driving the getaway car for",
+    "len": 8,
+    "position": 9,
+    "answer": "        ",
+    "startx": 11,
+    "starty": 1,
+    "orientation": "down"
+  },
+  {
+    "clue": "Island east of Java",
+    "len": 4,
+    "position": 10,
+    "answer": "    ",
+    "startx": 12,
+    "starty": 1,
+    "orientation": "down"
+  },
+  {
+    "clue": "Z _ zebra",
+    "len": 4,
+    "position": 11,
+    "answer": "    ",
+    "startx": 13,
+    "starty": 1,
+    "orientation": "down"
+  },
+  {
+    "clue": "Like lowest—mileage driving",
+    "len": 4,
+    "position": 12,
+    "answer": "    ",
+    "startx": 14,
+    "starty": 1,
+    "orientation": "down"
+  },
+  {
+    "clue": "Diamonds, slangily",
+    "len": 3,
+    "position": 13,
+    "answer": "   ",
+    "startx": 15,
+    "starty": 1,
+    "orientation": "down"
+  },
+  {
+    "clue": "Stitch up",
+    "len": 3,
+    "position": 21,
+    "answer": "   ",
+    "startx": 5,
+    "starty": 4,
+    "orientation": "down"
+  },
+  {
+    "clue": "Bars at the checkout counter: Abbr.",
+    "len": 3,
+    "position": 22,
+    "answer": "   ",
+    "startx": 10,
+    "starty": 4,
+    "orientation": "down"
+  },
+  {
+    "clue": "Eats like a bird",
+    "len": 5,
+    "position": 25,
+    "answer": "     ",
+    "startx": 1,
+    "starty": 6,
+    "orientation": "down"
+  },
+  {
+    "clue": "Maui greeting",
+    "len": 5,
+    "position": 26,
+    "answer": "     ",
+    "startx": 2,
+    "starty": 6,
+    "orientation": "down"
+  },
+  {
+    "clue": "Louise and Turner",
+    "len": 5,
+    "position": 27,
+    "answer": "     ",
+    "startx": 3,
+    "starty": 6,
+    "orientation": "down"
+  },
+  {
+    "clue": "Carry on",
+    "len": 4,
+    "position": 29,
+    "answer": "    ",
+    "startx": 7,
+    "starty": 6,
+    "orientation": "down"
+  },
+  {
+    "clue": "Keyboard key",
+    "len": 5,
+    "position": 30,
+    "answer": "     ",
+    "startx": 8,
+    "starty": 6,
+    "orientation": "down"
+  },
+  {
+    "clue": "Comedian‘s stock",
+    "len": 4,
+    "position": 32,
+    "answer": "    ",
+    "startx": 12,
+    "starty": 6,
+    "orientation": "down"
+  },
+  {
+    "clue": "Sonora \"so |ong\"",
+    "len": 5,
+    "position": 33,
+    "answer": "     ",
+    "startx": 13,
+    "starty": 6,
+    "orientation": "down"
+  },
+  {
+    "clue": "Washer cycle",
+    "len": 5,
+    "position": 34,
+    "answer": "     ",
+    "startx": 14,
+    "starty": 6,
+    "orientation": "down"
+  },
+  {
+    "clue": "\"Contact\" author Carl",
+    "len": 5,
+    "position": 35,
+    "answer": "     ",
+    "startx": 15,
+    "starty": 6,
+    "orientation": "down"
+  },
+  {
+    "clue": "Invites",
+    "len": 4,
+    "position": 37,
+    "answer": "    ",
+    "startx": 4,
+    "starty": 7,
+    "orientation": "down"
+  },
+  {
+    "clue": "Pate||a‘s place",
+    "len": 4,
+    "position": 39,
+    "answer": "    ",
+    "startx": 9,
+    "starty": 7,
+    "orientation": "down"
+  },
+  {
+    "clue": "Get snockered",
+    "len": 8,
+    "position": 42,
+    "answer": "        ",
+    "startx": 5,
+    "starty": 8,
+    "orientation": "down"
+  },
+  {
+    "clue": "It puts the squeeze on",
+    "len": 8,
+    "position": 43,
+    "answer": "        ",
+    "startx": 10,
+    "starty": 8,
+    "orientation": "down"
+  },
+  {
+    "clue": "Hindu title",
+    "len": 3,
+    "position": 48,
+    "answer": "   ",
+    "startx": 6,
+    "starty": 10,
+    "orientation": "down"
+  },
+  {
+    "clue": "Singer McLean",
+    "len": 3,
+    "position": 50,
+    "answer": "   ",
+    "startx": 11,
+    "starty": 10,
+    "orientation": "down"
+  },
+  {
+    "clue": "Made a choice",
+    "len": 5,
+    "position": 53,
+    "answer": "     ",
+    "startx": 7,
+    "starty": 11,
+    "orientation": "down"
+  },
+  {
+    "clue": "Put forward",
+    "len": 5,
+    "position": 55,
+    "answer": "     ",
+    "startx": 12,
+    "starty": 11,
+    "orientation": "down"
+  },
+  {
+    "clue": "Mrs. Dithers",
+    "len": 4,
+    "position": 56,
+    "answer": "    ",
+    "startx": 2,
+    "starty": 12,
+    "orientation": "down"
+  },
+  {
+    "clue": "Dump problem",
+    "len": 4,
+    "position": 57,
+    "answer": "    ",
+    "startx": 3,
+    "starty": 12,
+    "orientation": "down"
+  },
+  {
+    "clue": "El f (weather factor)",
+    "len": 4,
+    "position": 58,
+    "answer": "    ",
+    "startx": 4,
+    "starty": 12,
+    "orientation": "down"
+  },
+  {
+    "clue": "Like some pizza orders",
+    "len": 4,
+    "position": 59,
+    "answer": "    ",
+    "startx": 8,
+    "starty": 12,
+    "orientation": "down"
+  },
+  {
+    "clue": "Gulf land",
+    "len": 4,
+    "position": 60,
+    "answer": "    ",
+    "startx": 9,
+    "starty": 12,
+    "orientation": "down"
+  },
+  {
+    "clue": "Rick's love in \"Casablanca\"",
+    "len": 4,
+    "position": 61,
+    "answer": "    ",
+    "startx": 13,
+    "starty": 12,
+    "orientation": "down"
+  },
+  {
+    "clue": "Something shed",
+    "len": 4,
+    "position": 62,
+    "answer": "    ",
+    "startx": 14,
+    "starty": 12,
+    "orientation": "down"
+  },
+  {
+    "clue": "Applicant's goal",
+    "len": 3,
+    "position": 63,
+    "answer": "   ",
+    "startx": 1,
+    "starty": 13,
+    "orientation": "down"
+  },
+  {
+    "clue": "Expected in",
+    "len": 3,
+    "position": 66,
+    "answer": "   ",
+    "startx": 15,
+    "starty": 13,
+    "orientation": "down"
+  }
+]
