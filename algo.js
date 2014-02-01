@@ -1,34 +1,105 @@
-PQ = require('priorityqueuejs');
+var data = require("./data.js");
+var slots = data.array;
 
-array = [{
-	clue: "First letter of greek alphabet",
-	answer: "",
-	position: 1,
-	orientation: "across",
-	startx: 1,
-	starty: 1,
-	length: 5,
-	answers: [{ name: "ALPHA", conf: 5 },
-                  { name: "SOFTG", conf: 3 },
-                  { name: "ALEPH", conf: 3 },
-                  { name: "SOFTC", conf: 3 },
-                  { name: "THETA", conf: 2 }]
-    }];
-
-console.log(JSON.stringify(array));
-
-var queue = new PQ(function(a, b) {
-	return a.priority - b.priority;
-    });
-
-queue.enq({ cash: 250, name: 'Valentina' });
-queue.enq({ cash: 300, name: 'Jano' });
-queue.enq({ cash: 150, name: 'Fran' });
-queue.size(); // 3
-queue.peek(); // { cash: 300, name: 'Jano' }
-queue.deq(); // { cash: 300, name: 'Jano' }
-queue.size(); // 2
-
-for (i = 0: i < array.length; i++) {
-    console.log();
+function clone (obj) {
+  return JSON.parse(JSON.stringify(obj));
 }
+
+function getSlotIndex () {
+  for (var i = 0; i < slots.length; i++) {
+    var slot = slots[i];
+    if (slot.answer === "")
+      return i;
+  }
+  return -1;
+}
+
+function getPossibleAnswers (slotIndex) {
+  return slots[slotIndex].answers;
+}
+
+function canInsert(board, slotIndex, possibleAnswerIdx) {
+  var slot = slots[slotIndex];
+  // console.log("slotIndex" + slotIndex);
+  // console.log(slot);
+  var possibleAnswer = slot.answers[possibleAnswerIdx];
+  for (var i = 0; i < possibleAnswer.name.length; i++) {
+      var curX = slot.startx;
+      var curY = slot.starty;
+      if (slot.orientation == "across")
+          curX += i;
+      else
+          curY += i;
+
+      var curC = board[curY][curX];
+      // if curC is a real char and is different from what we want to insert
+      // XXX test undefined
+      if (curC !== undefined && curC != possibleAnswer.name[i])
+        return false;
+  }
+  return true;
+}
+
+function insert (board, slotIndex, possibleAnswerIdx) {
+  var slot = slots[slotIndex];
+  var possibleAnswer = slot.answers[possibleAnswerIdx];
+  var newBoard = clone(board); // deep copy
+  for (var i = 0; i < possibleAnswer.name.length; i++) {
+      var curX = slot.startx;
+      var curY = slot.starty;
+      if (slot.orientation == "across")
+          curX += i;
+      else
+          curY += i;
+      newBoard[curY][curX] = possibleAnswer.name[i];
+  }
+  slots[slotIndex].answer = possibleAnswer;
+  return newBoard;
+}
+
+// modifies slots
+function fillInAnswer (board, slotIndex, possibleAnswerIdx) {
+  if (canInsert(board, slotIndex, possibleAnswerIdx)) {
+    var newBoard = insert(board, slotIndex, possibleAnswerIdx);
+    return newBoard;
+  }
+  return null;
+}
+
+function finished () {
+  return getSlotIndex() === -1;
+}
+
+function eraseAnswer (slotIndex) {
+  slots[slotIndex].answer = "";
+}
+
+solve = function (board) {
+	console.log(board)
+  var slotIndex = getSlotIndex();
+  var possibleAnswers = getPossibleAnswers(slotIndex);
+  for (var possibleAnswerIdx = 0; possibleAnswerIdx < possibleAnswers.length; possibleAnswerIdx++) {
+    var newBoard = fillInAnswer(board, slotIndex, possibleAnswerIdx);
+    if (newBoard == null)
+      continue;
+
+    // base case
+    if (finished())
+      return true;
+
+    var solved = solve(newBoard);
+    if (solved)
+      return true;
+
+    // we chose a wrong possible answer, erase it
+    eraseAnswer(slotIndex);
+  }
+  return false;
+}
+
+board = [];
+for (var i = 0; i < 3; i++) 
+	board[i] = [];
+
+solve(board);
+
