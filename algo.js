@@ -4,6 +4,9 @@ var maxSlots;
 var maxBoard;
 var maxSlotsCount = 0;
 
+var startTime = new Date().getTime();
+var MAX_RUN_TIME = 10*1000;
+
 for (var i = 0; i < slots.length; i++) {
     slots[i].startx--;
     slots[i].starty--;
@@ -113,6 +116,11 @@ function fillInAnswer (board, slotIndex, possibleAnswerIdx) {
 }
 
 function finished () {
+  if (new Date().getTime() - startTime > MAX_RUN_TIME) {
+    console.log("TIMEOUT");
+    return true;
+  }
+
   return maxSlotsCount === slots.length;
   // for (var i = 0; i < slots.length; i++) {
   //   var slot = slots[i];
@@ -130,8 +138,7 @@ function eraseAnswer (slotIndex) {
   slots[slotIndex].answer = newStr;
 }
 
-solve = function (board, numSkips) {
-	// printBoard(board);
+function solve (board, numSkips) {
   var slotIndex = getSlotIndex(board);
   if (slotIndex === -1) {
     return false;
@@ -155,7 +162,7 @@ solve = function (board, numSkips) {
     eraseAnswer(slotIndex);
   }
 
-  if (numSkips < 7) {
+  if (numSkips < 0.025 * slots.length) {
     slots[slotIndex].answer = "*";
     if (solve(board, ++numSkips)) {
       return true;
