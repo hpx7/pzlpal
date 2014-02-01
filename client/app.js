@@ -42,6 +42,7 @@ Template.crossword.notSolved = function () {
 
 Template.home.events({
   'click .btn': function (e) {
+    $('#loading').removeClass('hide');
     var crossword = {
       url: $('#url').val(),
       rows: $('#rows').val(),
@@ -56,6 +57,7 @@ Template.home.events({
 
 Template.crossword.events({
   'click .btn': function (e) {
+    $('#loading2').removeClass('hide');
     Meteor.call('solve', Session.get('crosswordId'));
   }
 });
