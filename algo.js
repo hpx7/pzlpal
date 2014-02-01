@@ -9,23 +9,19 @@ for (var i = 0; i < slots.length; i++) {
     slots[i].starty--;
 }
 
-function isEmpty(ans, replaceStar) {
-  ans = ans.replace(/\s+/g, '');
-  if (replaceStar)
-    ans = ans.replace(/\*+/g, '');
-  return ans === '';
-}
-
 function updateBest(board) {
   var fullSlotsCount = 0;
   for (var i = 0; i < slots.length; i++)
-    if (!isEmpty(slots[i].answer, true))
+    if (slots[i].answer.replace(/\s+/g, '') !== '' &&
+        slots[i].answer !== '*')
       fullSlotsCount++;
 
   if (fullSlotsCount > maxSlotsCount) {
     maxSlotsCount = fullSlotsCount;
     maxSlots = clone(slots);
     maxBoard = clone(board);
+    console.log(maxSlotsCount);
+    printBoard(maxBoard);
   }
 }
 
@@ -39,8 +35,9 @@ function getSlotIndex (board) {
 
   for (var i = 0; i < slots.length; i++) {
     var slot = slots[i];
-    if (!isEmpty(slot.answer, false))
+    if (slot.answer.replace(/\s+/g, '').length !== 0) {
       continue;
+    }
 
     collisions = 0;
     for (var j = 0; j < slot.length; j++) {
@@ -190,7 +187,7 @@ for (var i = 0; i < 15; i++) {
 }
 
 for (var i = 0; i < slots.length; i++) {
-  if (!isEmpty(slots[i].answer, false))
+  if (slots[i].answer.replace(/\s+/g, '') == '')
     continue;
   slot = slots[i];
   for (var j = 0; j < slot.length; j++) {
@@ -205,6 +202,5 @@ for (var i = 0; i < slots.length; i++) {
 }
 
 solve(board, 0);
-console.log(maxBoard);
 printBoard(maxBoard);
 
