@@ -8,14 +8,14 @@ Meteor.methods({
     fs.mkdirSync(wd);
     console.log("WORKING DIR:  " + wd);
 
-    var pathToCV = "/Users/Harsh/Dev/crossword-solver/imageparser";
+    var pathToCV = "/home/azureuser/pzlpal/imageparser";
     var execString = "ruby " + pathToCV + "/imageparser.rb " + crossword.url + " " + crossword.cols + " "
                       + crossword.rows + " " + wd + " " + pathToCV;
     console.log("EXEC: " + execString);
 
     // XXX make this more efficient?
-    var result = sh.exec(execString);
-    console.log(result);
+    var result = sh.exec(execString)
+    // console.log(result);
     console.log('done executing image parsing');
 
     var pathToJSON = wd + '/out.json';
@@ -36,6 +36,7 @@ Meteor.methods({
 });
 
 function go (data) {
+//    console.log("DATA LENGTH " + data.length)
   for (var i = 0; i < data.length; i++) {
     var pattern = "";
     for (var j = 0; j < data[i].len; j++)
@@ -53,6 +54,7 @@ var count = 0;
 function searchWordplays (clue, pattern, data, dataIdx) {
 	var url = 'http://www.wordplays.com/crossword-solver';
 
+  //  console.log("TRY TO GET INDEX", dataIdx);
   HTTP.post(url, { params: { clue: clue, pattern: pattern } }, function (error, result) {
     if (error) {
       console.log("ERROR1: ... retrying");
@@ -82,6 +84,7 @@ function searchWordplays (clue, pattern, data, dataIdx) {
     } catch (error) {
       console.log("ERROR2: ... retrying");
       searchWordplays(clue, pattern, data, dataIdx);
+	return;
     }
 
     count++;

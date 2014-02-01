@@ -6,7 +6,7 @@ runAlgo = function (slots) {
   var maxSlotsCount = 0;
 
   var startTime = new Date().getTime();
-  var MAX_RUN_TIME = 15*1000;
+  var MAX_RUN_TIME = 30*1000;
 
   // pre-processing
   for (var i = 0; i < slots.length; i++) {
@@ -26,8 +26,8 @@ runAlgo = function (slots) {
       maxSlots = clone(slots);
       maxBoard = clone(board);
       // console.log(maxSlotsCount);
-      pushToMongo();
-      printBoard(maxBoard);
+      pushToMongo(maxSlots);
+//      printBoard(maxBoard);
     }
   }
 
@@ -163,6 +163,8 @@ runAlgo = function (slots) {
         return true;
 
       updateBest(board);
+	if (Math.random() < 0.1)
+	    pushToMongo(slots);
       var solved = solve(newBoard, numSkips);
       if (solved)
         return true;
@@ -195,8 +197,9 @@ runAlgo = function (slots) {
     console.log();
   }
 
-  function pushToMongo () {
-    var maxSlotsMongo = clone(maxSlots);
+  function pushToMongo (slotsToPush) {
+      var maxSlotsMongo = clone(slotsToPush)
+
     maxSlotsMongo.forEach(function (slot) {
       if (slot.answer === "*") {
         var newAns = "";
@@ -244,7 +247,7 @@ runAlgo = function (slots) {
   console.log('DONE!');
 
   // post-processing
-  pushToMongo();
+  pushToMongo(maxSlots);
   // maxSlots.forEach(function (slot) {
   //   if (slot.answer === "*") {
   //     var newAns = "";
