@@ -58,7 +58,7 @@ Template.home.events({
 Template.crossword.events({
   'click .btn': function (e) {
     $('#loading2').removeClass('hide');
-    Meteor.call('solve', Session.get('crosswordId'));
+    Meteor.call('searchForClues', Session.get('crosswordId'));
   }
 });
 
