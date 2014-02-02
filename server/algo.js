@@ -25,9 +25,9 @@ runAlgo = function (slots) {
       maxSlotsCount = fullSlotsCount;
       maxSlots = clone(slots);
       maxBoard = clone(board);
-      // console.log(maxSlotsCount);
+      console.log(maxSlotsCount);
       pushToMongo();
-      printBoard(maxBoard);
+      // printBoard(maxBoard);
     }
   }
 
@@ -192,7 +192,7 @@ runAlgo = function (slots) {
       }
       console.log(cur);
     }
-    console.log();
+    console.log('\n');
   }
 
   function pushToMongo () {

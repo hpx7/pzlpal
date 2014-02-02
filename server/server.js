@@ -1,6 +1,8 @@
 var jsdom = Meteor.require("jsdom");
 var sh = Meteor.require('execSync');
 
+var count = 0;
+
 Meteor.methods({
 	parseImg: function (crosswordId) {
     var crossword = Crosswords.findOne(crosswordId);
@@ -28,7 +30,8 @@ Meteor.methods({
     console.log('done parsing');
     
 	},
-  searchForClues: function (crosswordId) {
+  solve: function (crosswordId) {
+    count = 0;
     var data = Slots.find({crosswordId: crosswordId}).fetch();
     for (var i = 0; i < data.length; i++) {
       var pattern = "";
@@ -38,18 +41,11 @@ Meteor.methods({
         for (var i = 0; i < slots.length; i++)
           Slots.update(slots[i]._id, slots[i]);
         console.log('done searching for clues');
+        runAlgo(slots);
       });
     }
   }
 });
-
-function go (data) {
-  
-  // console.log(JSON.stringify(data));
-  // runAlgo(data);
-}
-
-var count = 0;
 
 // XXX timeout?
 function searchWordplays (clue, pattern, data, dataIdx, done) {
@@ -90,9 +86,7 @@ function searchWordplays (clue, pattern, data, dataIdx, done) {
 
     count++;
     console.log(count);
-    if (count === data.length) {
-      count = 0;
+    if (count === data.length)
       done(data);
-    }
   });
 }

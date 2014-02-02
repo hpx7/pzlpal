@@ -11,6 +11,9 @@ Router.map(function () {
     path: '/crossword/:_id',
     before: function () {
       Session.set('crosswordId', this.params._id);
+    },
+    unload: function () {
+      Session.set('crosswordId', undefined);
     }
   });
 });
@@ -36,8 +39,14 @@ function fillSlot (slot) {
 }
 
 function hasAnswers (crosswordId) {
-  var slot = Slots.findOne({crosswordId: crosswordId});
-  return slot && slot.answers;
+  var slots = Slots.find({crosswordId: crosswordId}).fetch();
+  if (!slots || !slots.length)
+    return false;
+
+  for (var i = 0; i < slots.length; i++)
+    if (!slots[i].answers)
+      return false;
+  return true;
 }
 
 Template.crossword.hasAnswers = function () {
@@ -64,7 +73,7 @@ Template.home.events({
 Template.crossword.events({
   'click .btn': function (e) {
     $('#loading2').removeClass('hide');
-    Meteor.call('searchForClues', Session.get('crosswordId'));
+    Meteor.call('solve', Session.get('crosswordId'));
   }
 });
 
