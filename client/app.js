@@ -35,11 +35,16 @@ function fillSlot (slot) {
   }
 }
 
-Template.crossword.notSolved = function () {
-  var slots = Slots.find({crosswordId: Session.get('crosswordId')}).fetch();
-  return !slots.answers;
+function hasAnswers (crosswordId) {
+  var slot = Slots.findOne({crosswordId: crosswordId});
+  return slot && slot.answers;
 }
 
+Template.crossword.hasAnswers = function () {
+  return hasAnswers(Session.get('crosswordId'));
+}
+
+// step 1
 Template.home.events({
   'click .btn': function (e) {
     $('#loading').removeClass('hide');
@@ -55,6 +60,7 @@ Template.home.events({
   }
 });
 
+// step 2
 Template.crossword.events({
   'click .btn': function (e) {
     $('#loading2').removeClass('hide');
