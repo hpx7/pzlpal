@@ -6,7 +6,7 @@ runAlgo = function (slots) {
   var maxSlotsCount = 0;
 
   var startTime = new Date().getTime();
-  var MAX_RUN_TIME = 30*1000;
+  var MAX_RUN_TIME = 15*1000;
 
   // pre-processing
   for (var i = 0; i < slots.length; i++) {
@@ -163,8 +163,6 @@ runAlgo = function (slots) {
         return true;
 
       updateBest(board);
-	if (Math.random() < 0)
-	    pushToMongo(slots);
       var solved = solve(newBoard, numSkips);
       if (solved)
         return true;
@@ -197,9 +195,8 @@ runAlgo = function (slots) {
     console.log('\n');
   }
 
-  function pushToMongo (slotsToPush) {
-      var maxSlotsMongo = clone(slotsToPush)
-
+  function pushToMongo () {
+    var maxSlotsMongo = clone(maxSlots);
     maxSlotsMongo.forEach(function (slot) {
       if (slot.answer === "*") {
         var newAns = "";
@@ -247,7 +244,7 @@ runAlgo = function (slots) {
   console.log('DONE!');
 
   // post-processing
-  pushToMongo(maxSlots);
+  pushToMongo();
   // maxSlots.forEach(function (slot) {
   //   if (slot.answer === "*") {
   //     var newAns = "";

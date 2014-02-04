@@ -10,7 +10,7 @@ Meteor.methods({
     fs.mkdirSync(wd);
     console.log("WORKING DIR:  " + wd);
 
-    var pathToCV = "/home/azureuser/pzlpal/imageparser";
+    var pathToCV = "/Users/Harsh/Dev/crossword-solver/imageparser";
     var execString = "ruby " + pathToCV + "/imageparser.rb " + crossword.url + " " + crossword.cols + " "
                       + crossword.rows + " " + wd + " " + pathToCV;
     console.log("EXEC: " + execString);
@@ -31,6 +31,7 @@ Meteor.methods({
     
 	},
   solve: function (crosswordId) {
+    console.log('searching for clues...');
     count = 0;
     var data = Slots.find({crosswordId: crosswordId}).fetch();
     for (var i = 0; i < data.length; i++) {
@@ -86,7 +87,7 @@ function searchWordplays (clue, pattern, data, dataIdx, done) {
     }
 
     count++;
-    console.log(count);
+    console.log('count: ' + count);
     if (count === data.length)
       done(data);
   });
