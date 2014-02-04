@@ -19,7 +19,7 @@
 </template>
 
 <template name="crossword">
-  {{#if notSolved}}
+  {{#unless hasAnswers}}
     <br>
     <center>
       <button class="btn btn-primary btn-lg">Solve Crossword</button>
@@ -30,7 +30,7 @@
       </div>
     </center>
     <br><br>
-  {{/if}}
+  {{/unless}}
 
   {{#constant}}
   <div id="puzzle-wrapper"></div>

@@ -1,6 +1,8 @@
 var jsdom = Meteor.require("jsdom");
 var sh = Meteor.require('execSync');
 
+var count = 0;
+
 Meteor.methods({
 	parseImg: function (crosswordId) {
     var crossword = Crosswords.findOne(crosswordId);
@@ -29,41 +31,37 @@ Meteor.methods({
     
 	},
   solve: function (crosswordId) {
-    console.log('solving');
+    count = 0;
     var data = Slots.find({crosswordId: crosswordId}).fetch();
-    go(data);
+    for (var i = 0; i < data.length; i++) {
+      var pattern = "";
+      for (var j = 0; j < data[i].len; j++)
+        pattern += "?";
+      searchWordplays(data[i].clue, pattern, data, i, function (slots) {
+        for (var i = 0; i < slots.length; i++)
+          Slots.update(slots[i]._id, slots[i]);
+        console.log('done searching for clues');
+        runAlgo(slots);
+      });
+    }
   }
 });
 
-function go (data) {
-//    console.log("DATA LENGTH " + data.length)
-  for (var i = 0; i < data.length; i++) {
-    var pattern = "";
-    for (var j = 0; j < data[i].len; j++)
-      pattern += "?";
-    searchWordplays(data[i].clue, pattern, data, i);
-    // console.log(i+1);
-  }
-  // console.log(JSON.stringify(data));
-  // runAlgo(data);
-}
-
-var count = 0;
-
-// XXX timer
-function searchWordplays (clue, pattern, data, dataIdx) {
+// XXX timeout?
+function searchWordplays (clue, pattern, data, dataIdx, done) {
 	var url = 'http://www.wordplays.com/crossword-solver';
 
   //  console.log("TRY TO GET INDEX", dataIdx);
   HTTP.post(url, { params: { clue: clue, pattern: pattern } }, function (error, result) {
     if (error) {
       console.log("ERROR1: ... retrying");
-      searchWordplays(clue, pattern, data, dataIdx);
+      searchWordplays(clue, pattern, data, dataIdx, done);
+      return;
     }
 
-    var body = result.content;
-
     try {
+      var body = result.content;
+
       var wrapped = Async.wrap(jsdom.env);
       var window = wrapped(body, ["http://code.jquery.com/jquery.js"]);
       var $ = window.$;
@@ -83,15 +81,13 @@ function searchWordplays (clue, pattern, data, dataIdx) {
       data[dataIdx].answers = result;
     } catch (error) {
       console.log("ERROR2: ... retrying");
-      searchWordplays(clue, pattern, data, dataIdx);
-	return;
+      searchWordplays(clue, pattern, data, dataIdx, done);
+      return;
     }
 
     count++;
     console.log(count);
-    if (count === data.length) {
-      runAlgo(data);
-      count = 0;
-    }
+    if (count === data.length)
+      done(data);
   });
 }

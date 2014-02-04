@@ -11,6 +11,9 @@ Router.map(function () {
     path: '/crossword/:_id',
     before: function () {
       Session.set('crosswordId', this.params._id);
+    },
+    unload: function () {
+      Session.set('crosswordId', undefined);
     }
   });
 });
@@ -35,11 +38,22 @@ function fillSlot (slot) {
   }
 }
 
-Template.crossword.notSolved = function () {
-  var slots = Slots.find({crosswordId: Session.get('crosswordId')}).fetch();
-  return !slots.answers;
+function hasAnswers (crosswordId) {
+  var slots = Slots.find({crosswordId: crosswordId}).fetch();
+  if (!slots || !slots.length)
+    return false;
+
+  for (var i = 0; i < slots.length; i++)
+    if (!slots[i].answers)
+      return false;
+  return true;
 }
 
+Template.crossword.hasAnswers = function () {
+  return hasAnswers(Session.get('crosswordId'));
+}
+
+// step 1
 Template.home.events({
   'click .btn': function (e) {
     $('#loading').removeClass('hide');
@@ -55,6 +69,7 @@ Template.home.events({
   }
 });
 
+// step 2
 Template.crossword.events({
   'click .btn': function (e) {
     $('#loading2').removeClass('hide');
