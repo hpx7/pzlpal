@@ -163,7 +163,7 @@ runAlgo = function (slots) {
         return true;
 
       updateBest(board);
-	if (Math.random() < 0.1)
+	if (Math.random() < 0)
 	    pushToMongo(slots);
       var solved = solve(newBoard, numSkips);
       if (solved)
