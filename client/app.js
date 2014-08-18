@@ -17,6 +17,7 @@ Router.map(function () {
       Session.set('crosswordId', undefined);
       $('#puzzle-wrapper').html('');
       $('#puzzle-clues').html('');
+      drawn = false;
     }
   });
 });
@@ -56,9 +57,11 @@ Template.crossword.hasAnswers = function () {
   return hasAnswers(Session.get('crosswordId'));
 }
 
-Template.crossword.rendered = function () {
+function drawPuzzle () {
   var slots = Slots.find({crosswordId: Session.get('crosswordId')}).fetch();
-  if (slots.length) {
+  console.log(slots.length);
+  console.log($('#puzzle-wrapper').length);
+  if (slots.length && $('#puzzle-wrapper').length) {
     $('#puzzle-wrapper').html('');
     $('#puzzle-clues').html('');
     $('#puzzle-wrapper').crossword(clone(slots));
@@ -66,6 +69,10 @@ Template.crossword.rendered = function () {
       fillSlot(slots[i]);
   }
 }
+
+Deps.autorun(drawPuzzle);
+
+Template.crossword.rendered = drawPuzzle;
 
 // step 1
 Template.home.events({
