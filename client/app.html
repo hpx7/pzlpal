@@ -8,7 +8,7 @@
     {{> navbar}}
     <div class="container-fluid">
       <div class="row">
-        {{yield}}
+        {{> yield}}
       </div>
     </div>
   </body>
@@ -32,9 +32,7 @@
     <br><br>
   {{/unless}}
 
-  {{#constant}}
   <div id="puzzle-wrapper"></div>
-  {{/constant}}
 </template>
 
 <template name="home">

@@ -4,3 +4,8 @@
 /npm
 /assert
 /blocking
+/iron-layout
+/blaze-layout
+/iron-core
+/iron-dynamic-template
+/iron-router-progress

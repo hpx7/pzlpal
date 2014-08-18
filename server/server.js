@@ -3,6 +3,10 @@ var sh = Meteor.require('execSync');
 
 var count = 0;
 
+Meteor.publish('crossword', function (crosswordId) {
+  return Slots.find({crosswordId: crosswordId});
+});
+
 Meteor.methods({
 	parseImg: function (crosswordId) {
     var crossword = Crosswords.findOne(crosswordId);
@@ -10,14 +14,15 @@ Meteor.methods({
     fs.mkdirSync(wd);
     console.log("WORKING DIR:  " + wd);
 
-    var pathToCV = "/Users/Harsh/Dev/crossword-solver/imageparser";
+    var pathToCV = "/Users/Harsh/Dev/pzlpal/imageparser";
     var execString = "ruby " + pathToCV + "/imageparser.rb " + crossword.url + " " + crossword.cols + " "
                       + crossword.rows + " " + wd + " " + pathToCV;
     console.log("EXEC: " + execString);
 
     // XXX make this more efficient?
-    var result = sh.exec(execString)
-    // console.log(result);
+    var result = sh.exec(execString);
+    if (result.code !== 0)
+      console.log(result);
     console.log('done executing image parsing');
 
     var pathToJSON = wd + '/out.json';

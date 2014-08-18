@@ -3,6 +3,7 @@
     "bootstrap-3": {},
     "iron-router": {},
     "fs": {},
-    "npm": {}
+    "npm": {},
+    "iron-router-progress": {}
   }
 }
